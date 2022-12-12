@@ -2,41 +2,42 @@ import React, { useEffect } from 'react';
 import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import image from '../images/diurnalis.jpg'
-function Birthdays(props) {
-    let [Birthdays,setBirthdays]=useState([])
-    useEffect(()=>{
-      getBirthdays();
-    },[])
-    const getBirthdays=()=>{
-      axios.get("http://localhost:4040/birthdays/all-todos")
-      .then((response)=> {
-        console.log(response); 
-        setBirthdays(Array.from(response.data.payload))})
-      .catch(err=>alert(err))
-    }
-    let {register,handleSubmit}=useForm()
-    let [emptyTask,setEmptyTask]=useState(false);
-    const removetodo=(index)=>{
-      axios.delete(`http://localhost:4040/birthdays/remove/${index}`)
-      .then(response=>getBirthdays())
-      .catch(err=>alert(err))
-    }
-    const addtodo=(obj)=>{
-      if(obj.task==="" || obj.date===''){
-        setEmptyTask(true);
-      }
-      else{
-      obj.id=Birthdays.length  
-      axios.post("http://localhost:4040/birthdays/add-todo",obj)
-      .then(getBirthdays())
-      .catch(err=>alert(err))
-      setEmptyTask(false)
-    }
-    window.location.reload();
+import image from "../images/turinghut.jpg";
+function TuringHut(props) {
+  let [Birthdays,setBirthdays]=useState([])
+  useEffect(()=>{
+    getBirthdays();
+  },[])
+  const getBirthdays=()=>{
+    axios.get("http://localhost:4040/turinghut/all-todos")
+    .then((response)=> {
+      console.log(response); 
+      setBirthdays(Array.from(response.data.payload))})
+    .catch(err=>alert(err))
   }
-    return <div class='container m-5'>
-      
+  let {register,handleSubmit}=useForm()
+  let [emptyTask,setEmptyTask]=useState(false);
+  const removetodo=(index)=>{
+    axios.delete(`http://localhost:4040/turinghut/remove/${index}`)
+    .then(response=>getBirthdays())
+    .catch(err=>alert(err))
+  }
+  const addtodo=(obj)=>{
+    if(obj.task==="" || obj.date===''){
+      setEmptyTask(true);
+    }
+    else{
+    obj.id=Birthdays.length  
+    axios.post("http://localhost:4040/turinghut/add-todo",obj)
+    .then(getBirthdays())
+    .catch(err=>alert(err))
+    setEmptyTask(false)
+  }
+  window.location.reload();
+}
+  return (
+    <div>
+        <div class='container m-5'>
       <div style={{minHeight:"400px"}}>
       {Birthdays.length===0 ? <h1 class='text-danger text-[20px]'>No Events</h1> :
       <table class="table">
@@ -54,7 +55,7 @@ function Birthdays(props) {
                 <td>{index+1}</td>
                 <td>{element.task}</td>
                 <td>{element.date}</td>
-           {props.props==="Admin" &&     <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
+                {props.props==="Admin" &&   <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
               </tr>
             )
           }
@@ -76,10 +77,11 @@ function Birthdays(props) {
              <button class="btn btn-success mt-2" type="submit">+</button>
            </div>
          </div>
-       </form>}
-    </div>;
-    
-  }
+       </form>
+      }
+    </div>
+    </div>
+  )
+}
 
-
-export default Birthdays;
+export default TuringHut

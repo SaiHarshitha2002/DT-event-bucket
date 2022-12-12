@@ -2,41 +2,42 @@ import React, { useEffect } from 'react';
 import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import image from '../images/diurnalis.jpg'
-function Birthdays(props) {
+import image from '../images/stentorion.jpg'
+function Scintillate(props) {
     let [Birthdays,setBirthdays]=useState([])
-    useEffect(()=>{
-      getBirthdays();
-    },[])
-    const getBirthdays=()=>{
-      axios.get("http://localhost:4040/birthdays/all-todos")
-      .then((response)=> {
-        console.log(response); 
-        setBirthdays(Array.from(response.data.payload))})
-      .catch(err=>alert(err))
-    }
-    let {register,handleSubmit}=useForm()
-    let [emptyTask,setEmptyTask]=useState(false);
-    const removetodo=(index)=>{
-      axios.delete(`http://localhost:4040/birthdays/remove/${index}`)
-      .then(response=>getBirthdays())
-      .catch(err=>alert(err))
-    }
-    const addtodo=(obj)=>{
-      if(obj.task==="" || obj.date===''){
-        setEmptyTask(true);
-      }
-      else{
-      obj.id=Birthdays.length  
-      axios.post("http://localhost:4040/birthdays/add-todo",obj)
-      .then(getBirthdays())
-      .catch(err=>alert(err))
-      setEmptyTask(false)
-    }
-    window.location.reload();
+  useEffect(()=>{
+    getBirthdays();
+  },[])
+  const getBirthdays=()=>{
+    axios.get("http://localhost:4040/scintillate/all-todos")
+    .then((response)=> {
+      console.log(response); 
+      setBirthdays(Array.from(response.data.payload))})
+    .catch(err=>alert(err))
   }
-    return <div class='container m-5'>
-      
+  let {register,handleSubmit}=useForm()
+  let [emptyTask,setEmptyTask]=useState(false);
+  const removetodo=(index)=>{
+    axios.delete(`http://localhost:4040/scintillate/remove/${index}`)
+    .then(response=>getBirthdays())
+    .catch(err=>alert(err))
+  }
+  const addtodo=(obj)=>{
+    if(obj.task==="" || obj.date===''){
+      setEmptyTask(true);
+    }
+    else{
+    obj.id=Birthdays.length  
+    axios.post("http://localhost:4040/scintillate/add-todo",obj)
+    .then(getBirthdays())
+    .catch(err=>alert(err))
+    setEmptyTask(false)
+  }
+  window.location.reload();
+}
+  return (
+    <div>
+        <div class='container m-5'>
       <div style={{minHeight:"400px"}}>
       {Birthdays.length===0 ? <h1 class='text-danger text-[20px]'>No Events</h1> :
       <table class="table">
@@ -54,7 +55,7 @@ function Birthdays(props) {
                 <td>{index+1}</td>
                 <td>{element.task}</td>
                 <td>{element.date}</td>
-           {props.props==="Admin" &&     <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
+                {props.props==="Admin" &&   <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
               </tr>
             )
           }
@@ -70,16 +71,17 @@ function Birthdays(props) {
              <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your task' {...register("task")} />
            </div>
            <div className="col-sm-3">
-             <input type="date" id="#" className='form-control mt-2' {...register("date")} />
+             <input type="date" id="#" className='form-control' {...register("date")} />
            </div>
            <div class="col-sm-2">
-             <button class="btn btn-success mt-2" type="submit">+</button>
+             <button class="btn btn-success" type="submit">+</button>
            </div>
          </div>
-       </form>}
-    </div>;
-    
-  }
+       </form>
+      }
+    </div>
+    </div>
+  )
+}
 
-
-export default Birthdays;
+export default Scintillate

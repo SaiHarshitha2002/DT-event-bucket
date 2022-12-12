@@ -2,66 +2,129 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 //import {toall} from "./Work"
 function All() {
-  
-  let [Birthdays,setBirthdays]=useState([])
-  let [worktodos,setworktodos]=useState([])
-  let [Personaltodos,setPersonaltodos]=useState([])
-  let [wishlisttodos,setwishlisttodos]=useState([])
-  const getBirthdays=()=>{
-    axios.get("http://localhost:4040/birthdays/all-todos")
+  let [turingHut,setTuringHut]=useState([]);
+  let [vjtheatro,setVjTheatro]=useState([]);
+  let [dramatrix,setDramatrix]=useState([]);
+  let [stentorion,setStentorion]=useState([]);
+  let [creativeArts,setCreativeArts]=useState([]);
+  let [cresendro,setCresendo]=useState([]);
+  let [diurnalis,setDurnalis]=useState([]);
+  let [liveWire,setLiveWire]=useState([]);
+  let [specialEvents,setSpecialEvents]=useState([]);
+  let [nrithyaTarag,setNrithyaTarag]=useState([]);
+  const getTuringHut=()=>{
+    axios.get("http://localhost:4040/turingHut/all-todos")
     .then((response)=> {
       console.log(response); 
-      setBirthdays(Array.from(response.data.payload))})
+      setTuringHut(Array.from(response.data.payload))})
     .catch(err=>alert(err))
   }
-  const getWorkTodos=()=>{
+////////////////////////////
+const getvjtheatro=()=>{
+  axios.get("http://localhost:4040/work/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setVjTheatro(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+const getdramatrix=()=>{
+  axios.get("http://localhost:4040/dramatrix/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setDramatrix(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+const getStentorian=()=>{
+  axios.get("http://localhost:4040/scintillate/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setStentorion(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+const getCreativeArts=()=>{
+  axios.get("http://localhost:4040/creativearts/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setCreativeArts(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+const getCResendo=()=>{
+  axios.get("http://localhost:4040/cresendo/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setCresendo(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+const getDiurnalis=()=>{
+  axios.get("http://localhost:4040/birthdays/all-todos")
+  .then((response)=> {
+    console.log(response); 
+    setDurnalis(Array.from(response.data.payload))})
+  .catch(err=>alert(err))
+}
+
+
+
+
+
+
+
+  /////////////////////////////////
+  const getLiveWire=()=>{
     // console.log("This is called")
-     axios.get("http://localhost:4040/work/all-todos")
+     axios.get("http://localhost:4040/personal/all-todos")
      .then(response=> {
-      setworktodos(Array.from(response.data.payload))
+      setLiveWire(Array.from(response.data.payload))
      // console.log(response)
      })
      .catch(err=>alert(err))
    }
-   const getPersonalTodos=()=>{
-    axios.get("http://localhost:4040/Personal/all-todos")
-    .then(response=>setPersonaltodos(Array.from(response.data.payload)))
+   const getSpecialEvents=()=>{
+    axios.get("http://localhost:4040/specialEvents/all-todos")
+    .then(response=>setSpecialEvents(Array.from(response.data.payload)))
     .catch(err=>alert(err))
   }
-  const getwishlistTodos=()=>{
+  const getnrithyaTarag=()=>{
     axios.get("http://localhost:4040/wishlist/all-todos")
     .then((response)=>{
       console.log(response);
-      setwishlisttodos(Array.from(response.data.payload))})
+      setNrithyaTarag(Array.from(response.data.payload))})
     .catch(err=>alert(err))
   }
   useEffect(()=>{
-    getBirthdays();
-    getWorkTodos();
-    getPersonalTodos();
-    getwishlistTodos();
+    getCResendo()
+    getDiurnalis()
+    getLiveWire()
+    getSpecialEvents()
+    getStentorian()
+    getTuringHut()
+    getdramatrix()
+    getnrithyaTarag()
+    getvjtheatro()
+    getCreativeArts()
   },[])
   return <div>
   <div class='container-md m-5'>
-      
-      <div >
-      {Birthdays.length===0 ?<div></div> :
-      <table class="table">
+  <table class="table text-center" >
         <thead>
           <tr>
-            <th>Sno</th>
-            <th>Task</th>
-            
+            <th  style={{width:"300px"}}>Event</th> 
+            <th className=''> <span className='ms-4'> Date</span></th>
+            <th> <span className=''> Club</span></th>
           </tr>
         </thead>
+        </table>
+      <div >
+      {cresendro.length===0 ?<div></div> :
+     <table className='table'>
         <tbody>
           {
-            Birthdays.map((element,index)=>
+            cresendro.map((element,index)=>
               <tr>
-                <td>{index+1}</td>
-                <td>{element.task}</td>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
               
-                <td>Birthday</td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td className=''>Cresendo</td>
               </tr>
             )
           }
@@ -70,60 +133,172 @@ function All() {
       </div>
 
   
+   <div >
+      {vjtheatro.length===0 ?<div></div> :
+      <table class="table">
+        
+        <tbody>
+          {
+            vjtheatro.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>VJTheatro</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+
+      <div >
+      {turingHut.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            turingHut.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>TuringHut</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
   
-  <div >
-    {worktodos.length===0 ?<div></div> :
-    <table class="table ms-4">
-     
-      <tbody>
-        {
-          worktodos.map((element,index)=>
-            <tr>
-              <td>{index+1}</td>
-              <td>{element.task}</td>
-              <td>Work</td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>}
-    </div>
-    
-    <div >
-    {Personaltodos.length===0 ?<div></div> :
-    <table class="table ms-5">
-      
-      <tbody>
-        {
-          Personaltodos.map((element,index)=>
-            <tr>
-              <td>{index+1}</td>
-              <td>{element.task}</td>
-              <td className='ms-2'>Personal</td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>}
-    </div>
-    
-    <div >
-    {wishlisttodos.length===0 ?<div></div> :
-    <table class="table ms-5">
-     
-      <tbody>
-        {
-          wishlisttodos.map((element,index)=>
-            <tr>
-              <td>{index+1}</td>
-              <td>{element.task}</td>
-              <td>Wishlist</td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>}
-    </div>
+
+      <div >
+      {dramatrix.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            dramatrix.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>Dramatrix</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+
+      <div >
+      {stentorion.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            stentorion.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>Stentorion</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+      <div >
+      {creativeArts.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            creativeArts.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>TuringHut</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+      <div >
+      {diurnalis.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            diurnalis.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>Diurnalis</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+
+      <div >
+      {liveWire.length===0 ?<div></div> :
+      <table class="table">
+        
+        <tbody>
+          {
+            liveWire.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>LiveWire</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+      <div >
+      {specialEvents.length===0 ?<div></div> :
+      <table class="table">
+        
+        <tbody>
+          {
+            specialEvents.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>SpecialEvent</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
+      <div >
+      {nrithyaTarag.length===0 ?<div></div> :
+      <table class="table">
+       
+        <tbody>
+          {
+            nrithyaTarag.map((element,index)=>
+              <tr>
+              <td  style={{width:"300px"}}><span >{element.task}</span></td>
+              <td  style={{width:"300px"}}><span >{element.date}</span></td>
+                <td>NrithyaTarag</td>
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
+      </div>
+
     </div>
   </div>;
 

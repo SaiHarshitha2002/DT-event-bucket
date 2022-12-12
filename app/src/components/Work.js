@@ -1,85 +1,85 @@
-import React, { useEffect } from 'react';
 import axios from 'axios';
-import { Axios } from 'axios';
+import React, { useEffect } from 'react';
 //import './work.css';
-import {useState} from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-function Work() {
-  let [worktodos,setworktodos]=useState([])
+import image from '../images/vjteatro.jpg'
+function Work(props) {
+ 
+  let [Birthdays,setBirthdays]=useState([])
   useEffect(()=>{
-    getWorkTodos();
-    console.log('hii hello evartho matladuthunnav');
-    console.log(worktodos);
+    getBirthdays();
   },[])
-  console.log(worktodos);
-const getWorkTodos=()=>{
- // console.log("This is called")
-  axios.get("http://localhost:4040/work/all-todos")
-  .then(response=> {
-   setworktodos(Array.from(response.data.payload))
-  // console.log(response)
-  })
-  .catch(err=>alert(err))
-}
-//  console.log(worktodos) 
+  const getBirthdays=()=>{
+    axios.get("http://localhost:4040/work/all-todos")
+    .then((response)=> {
+      console.log(response); 
+      setBirthdays(Array.from(response.data.payload))})
+    .catch(err=>alert(err))
+  }
   let {register,handleSubmit}=useForm()
-  const removetodo=(id)=>{
-    axios.delete(`http://localhost:4040/work/remove/${id}`)
-    .then(response=>{
-      //alert("Task removed successfully")
-      console.log(response);
-      getWorkTodos();
-    })
+  let [emptyTask,setEmptyTask]=useState(false);
+  const removetodo=(index)=>{
+    axios.delete(`http://localhost:4040/work/remove/${index}`)
+    .then(response=>getBirthdays())
     .catch(err=>alert(err))
-    
-
   }
-  const addtodo= (wobj)=>{
-   console.log(wobj);
-   wobj.id=worktodos.length
-  axios.post('http://localhost:4040/work/add-todo',wobj)
-    .then(response=>{
-      getWorkTodos();
-    })
+  const addtodo=(obj)=>{
+    if(obj.task==="" || obj.date===''){
+      setEmptyTask(true);
+    }
+    else{
+    obj.id=Birthdays.length  
+    axios.post("http://localhost:4040/work/add-todo",obj)
+    .then(getBirthdays())
     .catch(err=>alert(err))
-    
-    console.log(worktodos)
+    setEmptyTask(false)
   }
+  window.location.reload();
+}
   return <div class='container m-5'>
-    
-    <div style={{minHeight:"400px"}}>
-    {worktodos.length===0 ? <h1 class='text-danger display-3'>No Tasks found</h1> :
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Sno</th>
-          <th>Task</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          worktodos.map((element,index)=>
-            <tr>
-              <td>{index+1}</td>
-              <td>{element.task}</td>
-              <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>}
-    </div>
-     <form onSubmit={handleSubmit(addtodo)} >
-       <div class="row">
-         <div class="col-sm-10">
-           <input type="text" id="" class="form-control" placeholder='Add your task' {...register("task")} />
-         </div>
-         <div class="col-sm-2">
-           <button class="btn btn-success" type="submit">+</button>
-         </div>
+  <div style={{minHeight:"400px"}}>
+  {Birthdays.length===0 ? <h1 class='text-danger  text-[20px]'>No Events</h1> :
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sno</th>
+        <th>Task</th>
+        <th>date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        Birthdays.map((element,index)=>
+          <tr>
+            <td>{index+1}</td>
+            <td>{element.task}</td>
+            <td>{element.date}</td>
+            {props.props==="Admin" &&   <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
+          </tr>
+        )
+      }
+    </tbody>
+  </table>}
+  </div>
+  {emptyTask && <p>*Cannot add a empty task</p>}
+  {props.props==="Admin" &&
+   <form onSubmit={handleSubmit(addtodo)} >
+     <div class="row">
+     <div className="col-sm-1 pb-2"><img src={image} alt="" className='display-block mb-5' style={{height:"60px"}} /></div>
+       <div class="col-sm-6">
+         <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your task' {...register("task")} />
        </div>
-     </form>
-  </div>;
+       <div className="col-sm-3">
+         <input type="date" id="#" className='form-control mt-2' {...register("date")} />
+       </div>
+       <div class="col-sm-2">
+         <button class="btn btn-success mt-2" type="submit">+</button>
+       </div>
+     </div>
+   </form>
+  }
+</div>
   
 }
 

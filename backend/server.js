@@ -6,6 +6,12 @@ const personalApi = require('./APIS/personalApi');
 const wishlistsApi=require('./APIS/wishlistsApi');
 const birthdaysApi=require('./APIS/birthdaysApi');
 const userApi = require('./APIS/userApis');
+const turingHutApi=require('./APIS/turinghut')
+const creativeArtsApi=require('./APIS/creativeArts')
+const dramatrixApi=require('./APIS/dramatrix')
+const scintillateApi=require('./APIS/scintillate')
+const cresendoApi=require('./APIS/cresendo')
+const specialEventsApi=require('./APIS/specialEvents')
 const app=exp()
 app.use(cors())
 
@@ -23,11 +29,23 @@ mclient.connect(DBurl)
     const wishlistsCollection=databaseObj.collection('wishlistsTodos')
     const birthdaysCollection=databaseObj.collection('birthdaysTodos')
     const userCollection=databaseObj.collection("UserCollection")
+    const turinghutCollection=databaseObj.collection("TuringHut")
+    const creativeArtsCollection=databaseObj.collection("CreativeArts")
+    const dramatrixCollection=databaseObj.collection("Dramatrix")
+    const scintillateCollection=databaseObj.collection("Scintillate")
+    const cresendoCollection=databaseObj.collection("Cresendo")
+    const specialEventsCollection=databaseObj.collection("specialEvents")
+    app.set("cresendoCollection",cresendoCollection)
+    app.set("scintillateCollection",scintillateCollection)
+    app.set("dramatrixCollection",dramatrixCollection)
+    app.set("turinghutCollection",turinghutCollection);
     app.set("userCollection",userCollection);
     app.set("workCollection",workCollection);
     app.set("personalCollection",personalCollection);
     app.set("wishlistsCollection",wishlistsCollection);
     app.set("birthdaysCollection",birthdaysCollection);
+    app.set("creativeArtsCollection",creativeArtsCollection);
+    app.set("specialEventsCollections",specialEventsCollection);
     console.log('DB connection successfull')
 })
 .catch(()=>console.log('Error in connecting to the database'))
@@ -37,8 +55,12 @@ app.use('/Personal',personalApi)
 app.use('/wishlist',wishlistsApi) 
 app.use('/birthdays',birthdaysApi) 
 app.use('/users',userApi)
-
-
+app.use('/turinghut',turingHutApi)
+app.use('/creativearts',creativeArtsApi)
+app.use('/cresendo',cresendoApi)
+app.use('/dramatrix',dramatrixApi)
+app.use('/scintillate',scintillateApi)
+app.use('/specialEvents',specialEventsApi)
 app.use((request, response, next) => {
     response.send({ message: `path ${request.url} is invalid` });
   });

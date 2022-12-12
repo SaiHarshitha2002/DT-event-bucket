@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Image from "../images/bg.jpg";
-function Login(){
+function Login(props){
     //functions
+    
     let [validobj,setvalidobj]=useState([])
     let [currentuser,setcurrentuser]=useState([])
     let navigate=useNavigate()
@@ -31,7 +32,7 @@ function Login(){
            axios.post('http://localhost:4040/users/login',userobj)
           .then((response)=>{
             if(response.data.message===true){
-              
+              props.props(userobj.name)
               navigate('/home')
             }
 

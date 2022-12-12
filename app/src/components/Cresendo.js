@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import image from '../images/diurnalis.jpg'
-function Birthdays(props) {
+import image from '../images/cresendo.jpg'
+function Cresendo(props) {
     let [Birthdays,setBirthdays]=useState([])
     useEffect(()=>{
       getBirthdays();
     },[])
     const getBirthdays=()=>{
-      axios.get("http://localhost:4040/birthdays/all-todos")
+      axios.get("http://localhost:4040/cresendo/all-todos")
       .then((response)=> {
         console.log(response); 
         setBirthdays(Array.from(response.data.payload))})
@@ -18,7 +18,7 @@ function Birthdays(props) {
     let {register,handleSubmit}=useForm()
     let [emptyTask,setEmptyTask]=useState(false);
     const removetodo=(index)=>{
-      axios.delete(`http://localhost:4040/birthdays/remove/${index}`)
+      axios.delete(`http://localhost:4040/cresendo/remove/${index}`)
       .then(response=>getBirthdays())
       .catch(err=>alert(err))
     }
@@ -28,15 +28,16 @@ function Birthdays(props) {
       }
       else{
       obj.id=Birthdays.length  
-      axios.post("http://localhost:4040/birthdays/add-todo",obj)
+      axios.post("http://localhost:4040/cresendo/add-todo",obj)
       .then(getBirthdays())
       .catch(err=>alert(err))
       setEmptyTask(false)
     }
     window.location.reload();
   }
-    return <div class='container m-5'>
-      
+  return (
+    <div>
+         <div class='container m-5'>
       <div style={{minHeight:"400px"}}>
       {Birthdays.length===0 ? <h1 class='text-danger text-[20px]'>No Events</h1> :
       <table class="table">
@@ -54,13 +55,14 @@ function Birthdays(props) {
                 <td>{index+1}</td>
                 <td>{element.task}</td>
                 <td>{element.date}</td>
-           {props.props==="Admin" &&     <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
+                {props.props==="Admin" &&    <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
               </tr>
             )
           }
         </tbody>
       </table>}
       </div>
+     
       {emptyTask && <p>*Cannot add a empty task</p>}
       {props.props==="Admin" &&
        <form onSubmit={handleSubmit(addtodo)} >
@@ -76,10 +78,11 @@ function Birthdays(props) {
              <button class="btn btn-success mt-2" type="submit">+</button>
            </div>
          </div>
-       </form>}
-    </div>;
-    
-  }
+       </form>
+      }
+    </div>
+    </div>
+  )
+}
 
-
-export default Birthdays;
+export default Cresendo
