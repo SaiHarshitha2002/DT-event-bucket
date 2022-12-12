@@ -16,12 +16,32 @@ import Dramatrix from './components/Dramatrix'
 import Scintillate from './components/Scintillate'
 import TuringHut from './components/TuringHut'
 import SpecialEvents from './components/SpecialEvents'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
 function App() {
+  
   let [user,setUser]=useState("");
   const getUser=(obj)=>{
-    setUser(obj);
+    console.log("HOOOO");
+    axios.get("http://localhost:4040/users/cuser")
+    .then((response)=>{setUser(response.data.payload.cuser)
+    console.log(response.data.payload.cuser)
+    window.location.reload()
+    })
+    .catch((err)=>{
+      console.log("first",err)
+    })
   }
+  useEffect(()=>{
+    axios.get("http://localhost:4040/users/cuser")
+    .then((response)=>{setUser(response.data.payload.cuser)
+     //window.location.reload()
+    })
+    .catch((err)=>{
+      console.log("first",err)
+    })
+    //window.location.reload()
+  })
   return (
      <div className='container m-5 p-5 text-center border border-5 border-dark rounded-3'>
    <div className='box border border-5 border-primary rounded-pill bg-primary '>

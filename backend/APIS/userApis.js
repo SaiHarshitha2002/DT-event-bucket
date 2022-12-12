@@ -6,7 +6,25 @@ userApi.use(exp.json())
 
 const expressAsyncHandler=require('express-async-handler')
 const bcryptjs=require('bcryptjs')
-const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken');
+const { response } = require('express');
+
+userApi.get('/cuser',expressAsyncHandler(async(request,response)=>{
+    let userCollection=request.app.get('userCollection')
+    
+    let userofDB=await userCollection.findOne({Hname:"DonotUse"})
+   
+    response.send({payload:userofDB})
+}))
+
+userApi.put('/update-cuser',expressAsyncHandler(async(request,response)=>{
+    let userCollection=request.app.get('userCollection')
+    let user=request.body
+    console.log("Hello");
+    await userCollection.updateOne({Hname:"DonotUse"},{$set:user})
+    response.send("success")
+}))
+
 userApi.post('/signup',expressAsyncHandler(async(request,response)=>{
     let userCollection=request.app.get('userCollection')
     let newuser=request.body

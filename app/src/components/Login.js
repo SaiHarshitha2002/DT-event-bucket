@@ -23,7 +23,7 @@ function Login(props){
     }
     const myStyle={
         backgroundImage: 
- "url('https://media.istockphoto.com/photos/to-do-list-in-notebook-with-calendar-picture-id1092571024?k=20&m=1092571024&s=612x612&w=0&h=dz6l5jjYZC0lU2dUkqu5g5_0XtY3xnHs57mJDNlvJSk=')",
+ "url('https://media.istockphoto.com/id/995353918/photo/close-up-of-calendar-on-the-table-planning-for-business-meeting-or-travel-planning-concept.jpg?s=612x612&w=0&k=20&c=rVmKXCL9JlATlEdaJECJecIl9D3zJT0QykCCanhkh_I=')",
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
     };
@@ -32,8 +32,15 @@ function Login(props){
            axios.post('http://localhost:4040/users/login',userobj)
           .then((response)=>{
             if(response.data.message===true){
+                userobj.cuser=userobj.name
+              axios.put("http://localhost:4040/users/update-cuser",userobj)
+              .then(()=>{
+               
+              })  
+              .catch(()=>{})
               props.props(userobj.name)
               navigate('/home')
+              
             }
 
             else{
@@ -41,6 +48,7 @@ function Login(props){
             }
           })
           .catch(err=>alert(err))
+         // window.location.reload()
     }
     return(
         <div className="container-md mt-5 mb-5  mx-auto " style={myStyle}>

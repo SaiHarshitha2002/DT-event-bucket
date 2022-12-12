@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import image10 from "../images/Image1.svg";
 import image20 from "../images/Corosulimage2.svg";
@@ -15,6 +15,7 @@ import image9 from "../images/cresendo.jpg";
 
 import { Carousel } from "react-bootstrap";
 function Home() {
+  const [state,setState]=useState(true)
   return (
     <div>
       <div className="container-md mt-3">
@@ -23,58 +24,58 @@ function Home() {
               style={{ borderColor: "red" }}
             >
               <ul className="nav mx-auto justify-content-evenly ">
-                <li className="nav-item " style={{color:"green"}}>
+                <li className="nav-item " style={{color:"green"}} onClick={()=>{setState(false)}} >
                   <Link className="nav-link  " to="all">
                     All
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="work">
                     VJ Teatro
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="personal">
                   Live Wire
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="wishlist">
                   Nritya Tarang
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="birthdays">
                   Diurnalis
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="creativeArts">
                     CreativeArts
                   </Link>
                 </li>
-                <li className="nav-item ">
+                <li className="nav-item " onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="cresendo">
                     Cresendo
                   </Link>
                 </li>
-                <li className="nav-item ">
+                <li className="nav-item " onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="dramatrix">
                     Dramatrix
                   </Link>
                 </li>
-                <li className="nav-item ">
+                <li className="nav-item " onClick={()=>{setState(false)}} >
                   <Link className="nav-link " to="scintillate">
                     Stentorian
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" onClick={()=>{setState(false)}}  >
                   <Link className="nav-link " to="turinghut">
                     Turing Hut
                   </Link>
                 </li>
                 <li className="nav-item  ">
-                  <Link className="nav-link " to="SpecialEvents">
+                  <Link className="nav-link " to="SpecialEvents" onClick={()=>{setState(false)}} >
                     Special Events
                   </Link>
                 </li>
@@ -159,9 +160,24 @@ function Home() {
             </Carousel>
           </div>
           <div className="col-sm-8">
+          {state? 
+          <div>
+             <div style={{height:"100px"}}>
+              {null}
+             </div>
+            <div className="container mt-5">
+              <h1 className="display-1 mt-5 d-flex justify-content-evenly font-weight-bold text-primary">Event Bucket</h1>
+              <div className="row">
+                <div className="col-sm-6"></div>
+                <div className="col-sm-6 lead text-primary">- See Whats in The Store</div>
+              </div>
+            </div>
+          </div>
+          : 
           <div>
               <Outlet />
             </div>
+          }
           </div>
         </div>
         <div className="display-1"></div>
