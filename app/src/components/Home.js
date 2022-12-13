@@ -164,7 +164,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="display-1"></div>
+        <div className="display-1">EventsBucket</div>
       </div>
     </div>
   );
