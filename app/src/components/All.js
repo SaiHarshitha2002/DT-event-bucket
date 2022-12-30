@@ -218,7 +218,7 @@ const getDiurnalis=()=>{
               <tr>
               <td  style={{width:"300px"}}><span >{element.task}</span></td>
               <td  style={{width:"300px"}}><span >{element.date}</span></td>
-                <td>TuringHut</td>
+                <td>CreativeArts</td>
               </tr>
             )
           }

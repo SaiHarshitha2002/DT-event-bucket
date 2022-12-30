@@ -41,35 +41,41 @@ function SpecialEvents(props) {
   <div style={{minHeight:"400px"}}>
   {Birthdays.length===0 ? <h1 class='text-danger text-[20px]'>No Events</h1> :
   <table class="table">
-    <thead>
-      <tr>
-        <th>Sno</th>
-        <th>Task</th>
-        <th>date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        Birthdays.map((element,index)=>
+        <thead>
           <tr>
-            <td>{index+1}</td>
-            <td>{element.task}</td>
-            <td>{element.date}</td>
-            {props.props==="Admin" &&   <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td>}
+            <th>Sno</th>
+            <th>Task</th>
+            <th>Location</th>
+            <th>date</th>
           </tr>
-        )
-      }
-    </tbody>
-  </table>}
+        </thead>
+        <tbody>
+          {
+            Birthdays.map((element,index)=>
+              <tr>
+                <td>{index+1}</td>
+                <td>{element.task}</td>
+                <td>{element.location}</td>
+                <td>{element.date}</td>
+
+           {props.props==="Admin" &&     <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
+              </tr>
+            )
+          }
+        </tbody>
+      </table>}
   </div>
   {emptyTask && <p>*Cannot add a empty task</p>}
   {props.props==="Admin" &&
    <form onSubmit={handleSubmit(addtodo)} >
      <div class="row">
     
-       <div class="col-sm-6">
-         <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your task' {...register("task")} />
-       </div>
+     <div class="col-sm-4">
+             <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your event' {...register("task")} />
+           </div>
+           <div class="col-sm-2">
+             <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add location' {...register("location")} />
+           </div>
        <div className="col-sm-3">
          <input type="date" id="#" className='form-control mt-2' {...register("date")} />
        </div>

@@ -4,10 +4,10 @@ import Home from './components/Home'
 import Contactus from './components/Contactus'
 import Profile from './components/Profile'
 import All from './components/All'
-import Work from './components/Work'
-import Personal from './components/Personal'
-import Wishlist from './components/Wishlist'
-import Birthdays from './components/Birthdays'
+import Vjtheatro from './components/Vjtheatro'
+import Livewire from './components/Livewire'
+import Nrithyatarang from './components/Nrityatarang'
+import Diurnalis from './components/Diurnalis'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Cresendo from './components/Cresendo'
@@ -65,10 +65,10 @@ function App() {
   <Route path='/' element={<Login props={getUser}/>} />
     <Route path="/home" element={<Home/>} >
       <Route path="all" element={<All/>} />
-      <Route path="work" element={<Work props={user}/>} />
-      <Route path="personal" element={<Personal props={user}/>} />
-      <Route path="wishlist" element={<Wishlist props={user}/>} />
-      <Route path="birthdays" element={<Birthdays props={user}/>} />
+      <Route path="Vjtheatro" element={<Vjtheatro props={user}/>} />
+      <Route path="Livewire" element={<Livewire props={user}/>} />
+      <Route path="Nrithyatarang" element={<Nrithyatarang props={user}/>} />
+      <Route path="Diurnalis" element={<Diurnalis props={user}/>} />
       <Route path="cresendo" element={<Cresendo props={user}/>}/>
       <Route path="creativeArts" element={<CreativeArts props={user}/> } />
       <Route path="dramatrix" element={<Dramatrix props={user}/>} />

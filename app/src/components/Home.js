@@ -30,22 +30,22 @@ function Home() {
                   </Link>
                 </li>
                 <li className="nav-item" onClick={()=>{setState(false)}} >
-                  <Link className="nav-link " to="work">
+                  <Link className="nav-link " to="Vjtheatro">
                     VJ Teatro
                   </Link>
                 </li>
                 <li className="nav-item" onClick={()=>{setState(false)}} >
-                  <Link className="nav-link " to="personal">
+                  <Link className="nav-link " to="Livewire">
                   Live Wire
                   </Link>
                 </li>
                 <li className="nav-item" onClick={()=>{setState(false)}} >
-                  <Link className="nav-link " to="wishlist">
+                  <Link className="nav-link " to="Nrithyatarang">
                   Nritya Tarang
                   </Link>
                 </li>
                 <li className="nav-item" onClick={()=>{setState(false)}} >
-                  <Link className="nav-link " to="birthdays">
+                  <Link className="nav-link " to="Diurnalis">
                   Diurnalis
                   </Link>
                 </li>

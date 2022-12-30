@@ -47,6 +47,7 @@ function Dramatrix(props) {
           <tr>
             <th>Sno</th>
             <th>Task</th>
+            <th>Location</th>
             <th>date</th>
           </tr>
         </thead>
@@ -56,8 +57,10 @@ function Dramatrix(props) {
               <tr>
                 <td>{index+1}</td>
                 <td>{element.task}</td>
+                <td>{element.location}</td>
                 <td>{element.date}</td>
-                {props.props==="Admin" && <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td>}
+
+           {props.props==="Admin" &&     <td> <button class="btn btn-danger" onClick={()=>removetodo(element.id)}>X</button> </td> }
               </tr>
             )
           }
@@ -69,8 +72,11 @@ function Dramatrix(props) {
        <form onSubmit={handleSubmit(addtodo)} >
          <div class="row">
          <div className="col-sm-1 pb-2"><img src={image} alt="" className='display-block mb-5' style={{height:"60px"}} /></div>
-           <div class="col-sm-6">
-             <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your task' {...register("task")} />
+         <div class="col-sm-4">
+             <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add your event' {...register("task")} />
+           </div>
+           <div class="col-sm-2">
+             <input type="text" id="" class="form-control mt-2 ms-2" placeholder='Add location' {...register("location")} />
            </div>
            <div className="col-sm-3">
              <input type="date" id="#" className='form-control mt-2' {...register("date")} />
